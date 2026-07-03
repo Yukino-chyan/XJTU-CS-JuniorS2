@@ -1,0 +1,15 @@
+void swap(int a;int b;) {
+    int temp = a;
+    a = b;
+    b = temp
+};
+
+
+
+int main() {
+    int arr[5]; 
+    arr[5]= {5, 3, 4, 1, 2};
+    swap(arr[1],arr4],);
+    return arr[0]
+}
+main()

@@ -1,0 +1,45 @@
+# 程序 = 声明表 + 入口语句表（如 main()）
+Prog -> DeclList StmtList
+
+# 声明表：每个声明后跟分号，可空
+DeclList -> DeclList Decl SCO | ε
+
+# 声明：变量 / 带初值变量 / 数组 / 函数（函数体含内部声明表与语句表）
+Decl -> Type ID
+      | Type ID ASG Expr
+      | Type ID LBK NUM RBK
+      | Type ID LPA ParamList RPA LBR DeclList StmtList RBR
+
+Type -> INT | FLOAT | VOID
+
+# 形参表：每个形参后跟分号，可空
+ParamList -> ParamList Param SCO | ε
+Param -> Type ID | Type ID LBK RBK | Type ID LPA Type RPA
+
+# 语句表：分号分隔；额外允许尾随分号（测试用例中块内最后一句有时带 ;）
+StmtList -> StmtList SCO Stmt | Stmt | StmtList SCO
+
+# 语句
+Stmt -> ID ASG Expr
+      | ID LBK Expr RBK ASG Expr
+      | IF LPA Bool RPA Stmt
+      | IF LPA Bool RPA Stmt ELSE Stmt
+      | WHILE LPA Bool RPA Stmt
+      | RETURN Expr
+      | LBR StmtList RBR
+      | ID LPA ArgList RPA
+      | PRINT Expr
+      | INPUT ID
+
+# 布尔表达式（仅用于 if / while 条件）；ID ASG Expr 支持 if (a = 3) 这类赋值作条件
+Bool -> Expr RelOp Expr | Expr | ID ASG Expr
+RelOp -> LT | LE | EQ | GT | GE | NE
+
+# 算术表达式（分层，带优先级）
+Expr -> Expr ADD Term | Expr SUB Term | Term
+Term -> Term MUL Fact | Term DIV Fact | Fact
+Fact -> NUM | FLO | ID | ID LBK Expr RBK | LPA Expr RPA | ID LPA ArgList RPA
+
+# 实参表：每个实参后跟逗号（含尾逗号），可空
+ArgList -> ArgList Arg CMA | ε
+Arg -> Expr | ID LBK RBK

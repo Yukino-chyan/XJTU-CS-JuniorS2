@@ -1,0 +1,14 @@
+int max(int a; int b;) {
+    if (a < b) {
+        return b
+    } else {
+        return a
+    }
+};
+int main() {
+    int r;
+    r = max(5, 8,);
+    print r;
+    return 0
+};
+main()

@@ -1,0 +1,8 @@
+float foo( ) {
+    float x;
+    float y;
+     x= 3.14;
+     y = x + 2.5;
+    return y
+};
+foo()

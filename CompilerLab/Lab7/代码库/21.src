@@ -1,0 +1,18 @@
+void sort(int arr[]) {
+    while ( i < 5) {   
+        while ( j < 5 ) {
+            if (arr[j] < arr[j+1]) {
+                int temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp
+            }
+        }
+    }
+};
+
+int test() {
+    int arr[5] = {5, 3, 4, 1, 2};
+    sort(arr[5],);
+    return 0
+};
+test()

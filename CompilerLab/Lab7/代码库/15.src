@@ -1,0 +1,9 @@
+void loop( ) {
+    loop( ) 
+};
+
+int main( ) {
+    loop( );
+    return 0
+};
+main()

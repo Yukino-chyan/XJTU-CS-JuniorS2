@@ -1,0 +1,11 @@
+int main() {
+    int matrix[3][3];
+    for (int i = 0; i < 3; i = i + 1) {
+        for (int j = 0; j < 3; j = j + 1) {
+            matrix[i][j] = i + j;
+        }
+    }
+    return matrix[2][2]
+};
+main()
+//错误，for不是关键字，二维数组不支持，声明同时不能赋值

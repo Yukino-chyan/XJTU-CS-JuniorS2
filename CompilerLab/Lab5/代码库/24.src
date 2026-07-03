@@ -1,0 +1,13 @@
+int factorial(int n) {
+    if (n <= 0) {             
+        return 1
+    };
+    return n * factorial(n-1)
+}
+
+int main() {
+    int x = factorial(-5);    
+    return x
+}
+main()
+ // 目前文法不支持负数，如自己定义的文法支持负数，可认为不报错

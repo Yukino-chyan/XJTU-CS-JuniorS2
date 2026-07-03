@@ -1,0 +1,17 @@
+int calculate(int a; int b; int c;) {
+    int result；
+    int temp;
+    result = a * b + c;
+    {
+        temp = result * 2;
+        result = temp
+    };
+    return result
+};
+
+int main() {
+    int x;
+    x = calculate(3, 4, 5,);
+    return x
+};
+main()

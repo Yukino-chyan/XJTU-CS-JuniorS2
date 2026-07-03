@@ -1,0 +1,19 @@
+float max(float arr[];) {
+    float max_val; 
+    max_val= arr[0];
+    if  (max_val <arr[1]) {
+        max_val = arr[1]
+    };
+    if (max_val< arr[2]  ) {
+        max_val = arr[2]
+    };
+    return max_val
+};
+
+int main() {
+    float arr[3];
+    arr[2] = 3.14;
+    arr[1] = 8.8;
+    return max(arr[],)
+};
+main()

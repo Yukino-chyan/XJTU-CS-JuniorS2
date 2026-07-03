@@ -1,0 +1,5 @@
+int main() {
+    foo()        
+};
+main()
+ // 错误：函数foo未声明

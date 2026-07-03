@@ -1,0 +1,8 @@
+int calc( ) {
+    return 1
+};
+
+int abc( ) {
+    calc( )
+};
+abc()

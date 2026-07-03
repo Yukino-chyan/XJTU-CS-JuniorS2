@@ -1,0 +1,10 @@
+int add(int a; int b;) {
+    return a + b
+};
+
+void acc ( ) {
+    int sum;
+   sum = add(3.48,);  
+    return 0
+};
+acc()

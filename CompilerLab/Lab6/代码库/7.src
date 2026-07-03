@@ -1,0 +1,4 @@
+float calc() {
+    return 8.88
+};
+calc()

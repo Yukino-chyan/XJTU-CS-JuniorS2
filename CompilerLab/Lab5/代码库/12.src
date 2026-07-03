@@ -1,0 +1,5 @@
+void func() {
+    int arr[8]; 
+    arr[0] = 5
+};
+func()

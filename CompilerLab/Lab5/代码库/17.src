@@ -1,0 +1,11 @@
+int add() {
+    int a;
+    int b;
+    
+    a = 3;
+    b = 2;
+    c = a * b + 5;
+    return c
+};
+add()
+//错误：c未声明

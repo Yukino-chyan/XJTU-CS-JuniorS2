@@ -1,0 +1,6 @@
+int main() {
+    int d;
+    d = 5;
+    return d
+};
+main()
