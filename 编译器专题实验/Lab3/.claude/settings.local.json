@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(pptx)",
+      "Bash(python *)",
+      "Bash(./lr0.exe)",
+      "PowerShell(chcp; [Console]::OutputEncoding; .\\\\lr0.exe 2>&1 | Out-String | Write-Output; Write-Output \"---exit code: $LASTEXITCODE---\")",
+      "PowerShell(.\\\\lr0.exe; Write-Output \"===EXITCODE: $LASTEXITCODE===\"; Get-Item .\\\\lr0.exe | Select-Object Length, LastWriteTime)",
+      "PowerShell(g++ -static -static-libgcc -static-libstdc++ -O2 lr0.cpp -o lr0.exe; Write-Output \"===COMPILE EXIT: $LASTEXITCODE===\"; if \\($LASTEXITCODE -eq 0\\) { .\\\\lr0.exe | Select-Object -First 15; Write-Output \"===RUN EXIT: $LASTEXITCODE===\" })",
+      "PowerShell(.\\\\build.ps1 2>&1)",
+      "PowerShell(g++ -static -static-libgcc -static-libstdc++ -O2 -Wall lr0.cpp -o lr0.exe)",
+      "PowerShell(.\\\\build.ps1 -NoRun)",
+      "PowerShell(.\\\\build.ps1)",
+      "Bash(g++ -static -std=c++17 lr0.cpp -o lr0.exe)",
+      "Bash(g++ -static -static-libgcc -static-libstdc++ -O2 -Wall lr0.cpp -o lr0.exe)",
+      "Bash(echo \"EXIT=$?\")",
+      "PowerShell(\\(Get-Command g++ -ErrorAction SilentlyContinue\\).Source; .\\\\build.ps1 -NoRun)",
+      "PowerShell(Write-Host \"g++ path:\" \\(Get-Command g++ -ErrorAction SilentlyContinue\\).Source; Write-Host \"lr0.exe locked?\"; if \\(Test-Path .\\\\lr0.exe\\) { try { [IO.File]::OpenWrite\\(\"$PWD\\\\lr0.exe\"\\).Close\\(\\); Write-Host \"  no \\(can write\\)\" } catch { Write-Host \"  YES: $\\($_.Exception.Message\\)\" } } else { Write-Host \"  not present\" })",
+      "PowerShell(Remove-Item .\\\\lr0.exe -Force -ErrorAction SilentlyContinue; & g++ -static -static-libgcc -static-libstdc++ -O2 -Wall lr0.cpp -o lr0.exe; Write-Host \"---EXIT=$LASTEXITCODE---\")",
+      "PowerShell(Write-Host \"=== which g++ ===\"; \\(Get-Command g++ -All | Select-Object -ExpandProperty Source\\); Write-Host \"=== g++ --version ===\"; & g++ --version; Write-Host \"=== EXIT=$LASTEXITCODE ===\")",
+      "PowerShell(Remove-Item .\\\\out_test.exe -Force -ErrorAction SilentlyContinue; Remove-Item .\\\\gcc.log -Force -ErrorAction SilentlyContinue; cmd /c \"g++ -v -static -static-libgcc -static-libstdc++ -O2 -Wall lr0.cpp -o out_test.exe > gcc.log 2>&1\"; Write-Host \"=== cmd EXIT=$LASTEXITCODE ===\"; Write-Host \"=== out_test.exe exists?  $\\(Test-Path .\\\\out_test.exe\\) ===\"; Write-Host \"=== last 40 lines of gcc.log ===\"; if \\(Test-Path .\\\\gcc.log\\) { Get-Content .\\\\gcc.log -Tail 40 } else { Write-Host \"\\(no log file produced — even stderr was lost\\)\" })",
+      "Read(//e/2026_Junior_S2/CompilerLab/**)",
+      "Bash(mkdir -p \"e:/2026_Junior_S2/CompilerLab/CompilerWeb\")",
+      "Skill(superpowers:systematic-debugging)",
+      "Skill(superpowers:systematic-debugging:*)",
+      "Skill(superpowers:verification-before-completion)",
+      "Skill(superpowers:verification-before-completion:*)",
+      "Bash(node --check \"e:/2026_Junior_S2/CompilerLab/CompilerWeb/lr0.js\")"
+    ]
+  }
+}
