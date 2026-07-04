@@ -1,0 +1,20 @@
+name        sort    type  scope       size/params
+-------------------------------------------------
+a           global  int[] global      10
+swap        func    void  global      (int[], int, int)
+arr         param   int[] swap        
+i           param   int   swap        
+j           param   int   swap        
+temp        local   int   swap        
+partition   func    int   global      (int[], int, int)
+arr         param   int[] partition   
+low         param   int   partition   
+high        param   int   partition   
+pivot       local   int   partition   
+i           local   int   partition   
+j           local   int   partition   
+qsort       func    void  global      (int[], int, int)
+arr         param   int[] qsort       
+low         param   int   qsort       
+high        param   int   qsort       
+p           local   int   qsort       

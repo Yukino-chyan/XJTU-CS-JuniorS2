@@ -1,0 +1,42 @@
+# QL 文法（大作业2 / B 路线 / SLR(1)）
+# 终结符 = 词法器 token 类型名；e = 空产生式；起始符号 = P（首条产生式左部）
+# 非终结符保留原 QL 文法单字母名；E1/E2/E3、C1/C2/C3 为 E、C 的优先级分层
+
+P -> B
+B -> LBRACE Ď Š RBRACE
+T -> INT | VOID
+
+# 声明表（拼接，可空）；声明：变量(带;) | 函数(头H+体B)
+Ď -> Ď D | e
+D -> T V SEMI | H B
+H -> T ID LPAREN Ǎ RPAREN
+
+# 左值：变量 / (多维)数组（含空方括号 V[] 以支持数组传名 arr[]）
+V -> ID | V LBRACK E RBRACK | V LBRACK RBRACK
+
+# 形参表：每个形参后跟 ;（可空）
+Ǎ -> Ǎ A SEMI | e
+A -> T ID | T ID LBRACK RBRACK
+
+# 语句表（拼接，可空）
+Š -> Š S | e
+S -> SEMI | E SEMI | RETURN E SEMI
+   | IF LPAREN C RPAREN S
+   | IF LPAREN C RPAREN S ELSE S
+   | WHILE LPAREN C RPAREN S
+   | B
+
+# 表达式分层：E赋值(右结合) > E1加减 > E2乘除 > E3因子
+E  -> E1 ASSIGN E | E1 PLUS_ASSIGN E | E1
+E1 -> E1 PLUS E2 | E1 MINUS E2 | E2
+E2 -> E2 MUL E3 | E2 DIV E3 | E3
+E3 -> NUM | V | ID LPAREN Ř RPAREN | LPAREN E RPAREN
+
+# 实参表：每个实参后跟 ,（含尾逗号，可空）；arr[] 已并入 V，故实参统一为 E
+Ř -> Ř E COMMA | e
+
+# 条件分层：C的|| > C1的&& > C2的! > C3关系（关系非结合）
+C  -> C OR C1 | C1
+C1 -> C1 AND C2 | C2
+C2 -> NOT C2 | C3
+C3 -> E | E LT E | E LE E | E GT E | E GE E | E EQ E | E NE E

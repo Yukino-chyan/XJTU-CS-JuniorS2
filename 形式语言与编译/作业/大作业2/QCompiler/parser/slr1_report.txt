@@ -1,0 +1,1501 @@
+﻿SLR(1)分析表生成程序
+文法文件: e:\2026_Junior_S2\��ʽ���������\��ҵ\����ҵ2\QCompiler\parser\grammar.txt
+
+原始文法
+  P -> B
+  B -> LBRACE Ď Š RBRACE
+  T -> INT | VOID
+  Ď -> Ď D | e
+  D -> T V SEMI | H B
+  H -> T ID LPAREN Ǎ RPAREN
+  V -> ID | V LBRACK E RBRACK | V LBRACK RBRACK
+  Ǎ -> Ǎ A SEMI | e
+  A -> T ID | T ID LBRACK RBRACK
+  Š -> Š S | e
+  S -> SEMI | E SEMI | RETURN E SEMI | IF LPAREN C RPAREN S | IF LPAREN C RPAREN S ELSE S | WHILE LPAREN C RPAREN S | B
+  E  -> E1 ASSIGN E | E1 PLUS_ASSIGN E | E1
+  E1 -> E1 PLUS E2 | E1 MINUS E2 | E2
+  E2 -> E2 MUL E3 | E2 DIV E3 | E3
+  E3 -> NUM | V | ID LPAREN Ř RPAREN | LPAREN E RPAREN
+  Ř -> Ř E COMMA | e
+  C  -> C OR C1 | C1
+  C1 -> C1 AND C2 | C2
+  C2 -> NOT C2 | C3
+  C3 -> E | E LT E | E LE E | E GT E | E GE E | E EQ E | E NE E
+
+文法解析结果
+  开始符号: P
+  增广开始符号: P'
+  非终结符: A B C C1 C2 C3 D E E1 E2 E3 H P P' S T V Ď Ř Š Ǎ 
+  终结符: AND ASSIGN COMMA DIV ELSE EQ GE GT ID IF INT LBRACE LBRACK LE LPAREN LT MINUS MUL NE NOT NUM OR PLUS PLUS_ASSIGN RBRACE RBRACK RETURN RPAREN SEMI VOID WHILE 
+  产生式:
+    0: P' -> P 
+    1: P -> B 
+    2: B -> LBRACE Ď Š RBRACE 
+    3: T -> INT 
+    4: T -> VOID 
+    5: Ď -> Ď D 
+    6: Ď -> 
+    7: D -> T V SEMI 
+    8: D -> H B 
+    9: H -> T ID LPAREN Ǎ RPAREN 
+    10: V -> ID 
+    11: V -> V LBRACK E RBRACK 
+    12: V -> V LBRACK RBRACK 
+    13: Ǎ -> Ǎ A SEMI 
+    14: Ǎ -> 
+    15: A -> T ID 
+    16: A -> T ID LBRACK RBRACK 
+    17: Š -> Š S 
+    18: Š -> 
+    19: S -> SEMI 
+    20: S -> E SEMI 
+    21: S -> RETURN E SEMI 
+    22: S -> IF LPAREN C RPAREN S 
+    23: S -> IF LPAREN C RPAREN S ELSE S 
+    24: S -> WHILE LPAREN C RPAREN S 
+    25: S -> B 
+    26: E -> E1 ASSIGN E 
+    27: E -> E1 PLUS_ASSIGN E 
+    28: E -> E1 
+    29: E1 -> E1 PLUS E2 
+    30: E1 -> E1 MINUS E2 
+    31: E1 -> E2 
+    32: E2 -> E2 MUL E3 
+    33: E2 -> E2 DIV E3 
+    34: E2 -> E3 
+    35: E3 -> NUM 
+    36: E3 -> V 
+    37: E3 -> ID LPAREN Ř RPAREN 
+    38: E3 -> LPAREN E RPAREN 
+    39: Ř -> Ř E COMMA 
+    40: Ř -> 
+    41: C -> C OR C1 
+    42: C -> C1 
+    43: C1 -> C1 AND C2 
+    44: C1 -> C2 
+    45: C2 -> NOT C2 
+    46: C2 -> C3 
+    47: C3 -> E 
+    48: C3 -> E LT E 
+    49: C3 -> E LE E 
+    50: C3 -> E GT E 
+    51: C3 -> E GE E 
+    52: C3 -> E EQ E 
+    53: C3 -> E NE E 
+
+增广文法
+  P' -> P 
+
+LR(0)项目集
+  I0:
+    P' -> . P 
+    P -> . B 
+    B -> . LBRACE Ď Š RBRACE 
+
+  I1:
+    P -> B . 
+
+  I2:
+    P' -> P . 
+
+  I3:
+    B -> LBRACE . Ď Š RBRACE 
+    Ď -> . Ď D 
+    Ď -> . 
+
+  I4:
+    B -> LBRACE Ď . Š RBRACE 
+    Ď -> Ď . D 
+    Š -> . Š S 
+    Š -> . 
+    D -> . T V SEMI 
+    D -> . H B 
+    T -> . INT 
+    T -> . VOID 
+    H -> . T ID LPAREN Ǎ RPAREN 
+
+  I5:
+    Ď -> Ď D . 
+
+  I6:
+    D -> H . B 
+    B -> . LBRACE Ď Š RBRACE 
+
+  I7:
+    D -> T . V SEMI 
+    H -> T . ID LPAREN Ǎ RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I8:
+    B -> LBRACE Ď Š . RBRACE 
+    Š -> Š . S 
+    S -> . SEMI 
+    S -> . E SEMI 
+    S -> . RETURN E SEMI 
+    S -> . IF LPAREN C RPAREN S 
+    S -> . IF LPAREN C RPAREN S ELSE S 
+    S -> . WHILE LPAREN C RPAREN S 
+    S -> . B 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    B -> . LBRACE Ď Š RBRACE 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I9:
+    T -> INT . 
+
+  I10:
+    T -> VOID . 
+
+  I11:
+    D -> H B . 
+
+  I12:
+    D -> T V . SEMI 
+    V -> V . LBRACK E RBRACK 
+    V -> V . LBRACK RBRACK 
+
+  I13:
+    H -> T ID . LPAREN Ǎ RPAREN 
+    V -> ID . 
+
+  I14:
+    S -> B . 
+
+  I15:
+    S -> E . SEMI 
+
+  I16:
+    E -> E1 . ASSIGN E 
+    E -> E1 . PLUS_ASSIGN E 
+    E -> E1 . 
+    E1 -> E1 . PLUS E2 
+    E1 -> E1 . MINUS E2 
+
+  I17:
+    E1 -> E2 . 
+    E2 -> E2 . MUL E3 
+    E2 -> E2 . DIV E3 
+
+  I18:
+    E2 -> E3 . 
+
+  I19:
+    Š -> Š S . 
+
+  I20:
+    E3 -> V . 
+    V -> V . LBRACK E RBRACK 
+    V -> V . LBRACK RBRACK 
+
+  I21:
+    E3 -> ID . LPAREN Ř RPAREN 
+    V -> ID . 
+
+  I22:
+    S -> IF . LPAREN C RPAREN S 
+    S -> IF . LPAREN C RPAREN S ELSE S 
+
+  I23:
+    E3 -> LPAREN . E RPAREN 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I24:
+    E3 -> NUM . 
+
+  I25:
+    B -> LBRACE Ď Š RBRACE . 
+
+  I26:
+    S -> RETURN . E SEMI 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I27:
+    S -> SEMI . 
+
+  I28:
+    S -> WHILE . LPAREN C RPAREN S 
+
+  I29:
+    V -> V LBRACK . E RBRACK 
+    V -> V LBRACK . RBRACK 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I30:
+    D -> T V SEMI . 
+
+  I31:
+    H -> T ID LPAREN . Ǎ RPAREN 
+    Ǎ -> . Ǎ A SEMI 
+    Ǎ -> . 
+
+  I32:
+    S -> E SEMI . 
+
+  I33:
+    E -> E1 ASSIGN . E 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I34:
+    E1 -> E1 MINUS . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I35:
+    E1 -> E1 PLUS . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I36:
+    E -> E1 PLUS_ASSIGN . E 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I37:
+    E2 -> E2 DIV . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I38:
+    E2 -> E2 MUL . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I39:
+    E3 -> ID LPAREN . Ř RPAREN 
+    Ř -> . Ř E COMMA 
+    Ř -> . 
+
+  I40:
+    S -> IF LPAREN . C RPAREN S 
+    S -> IF LPAREN . C RPAREN S ELSE S 
+    C -> . C OR C1 
+    C -> . C1 
+    C1 -> . C1 AND C2 
+    C1 -> . C2 
+    C2 -> . NOT C2 
+    C2 -> . C3 
+    C3 -> . E 
+    C3 -> . E LT E 
+    C3 -> . E LE E 
+    C3 -> . E GT E 
+    C3 -> . E GE E 
+    C3 -> . E EQ E 
+    C3 -> . E NE E 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I41:
+    E3 -> LPAREN E . RPAREN 
+
+  I42:
+    S -> RETURN E . SEMI 
+
+  I43:
+    S -> WHILE LPAREN . C RPAREN S 
+    C -> . C OR C1 
+    C -> . C1 
+    C1 -> . C1 AND C2 
+    C1 -> . C2 
+    C2 -> . NOT C2 
+    C2 -> . C3 
+    C3 -> . E 
+    C3 -> . E LT E 
+    C3 -> . E LE E 
+    C3 -> . E GT E 
+    C3 -> . E GE E 
+    C3 -> . E EQ E 
+    C3 -> . E NE E 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I44:
+    V -> V LBRACK E . RBRACK 
+
+  I45:
+    V -> V LBRACK RBRACK . 
+
+  I46:
+    H -> T ID LPAREN Ǎ . RPAREN 
+    Ǎ -> Ǎ . A SEMI 
+    A -> . T ID 
+    A -> . T ID LBRACK RBRACK 
+    T -> . INT 
+    T -> . VOID 
+
+  I47:
+    E -> E1 ASSIGN E . 
+
+  I48:
+    E1 -> E1 MINUS E2 . 
+    E2 -> E2 . MUL E3 
+    E2 -> E2 . DIV E3 
+
+  I49:
+    E1 -> E1 PLUS E2 . 
+    E2 -> E2 . MUL E3 
+    E2 -> E2 . DIV E3 
+
+  I50:
+    E -> E1 PLUS_ASSIGN E . 
+
+  I51:
+    E2 -> E2 DIV E3 . 
+
+  I52:
+    E2 -> E2 MUL E3 . 
+
+  I53:
+    E3 -> ID LPAREN Ř . RPAREN 
+    Ř -> Ř . E COMMA 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I54:
+    S -> IF LPAREN C . RPAREN S 
+    S -> IF LPAREN C . RPAREN S ELSE S 
+    C -> C . OR C1 
+
+  I55:
+    C -> C1 . 
+    C1 -> C1 . AND C2 
+
+  I56:
+    C1 -> C2 . 
+
+  I57:
+    C2 -> C3 . 
+
+  I58:
+    C3 -> E . 
+    C3 -> E . LT E 
+    C3 -> E . LE E 
+    C3 -> E . GT E 
+    C3 -> E . GE E 
+    C3 -> E . EQ E 
+    C3 -> E . NE E 
+
+  I59:
+    C2 -> NOT . C2 
+    C2 -> . NOT C2 
+    C2 -> . C3 
+    C3 -> . E 
+    C3 -> . E LT E 
+    C3 -> . E LE E 
+    C3 -> . E GT E 
+    C3 -> . E GE E 
+    C3 -> . E EQ E 
+    C3 -> . E NE E 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I60:
+    E3 -> LPAREN E RPAREN . 
+
+  I61:
+    S -> RETURN E SEMI . 
+
+  I62:
+    S -> WHILE LPAREN C . RPAREN S 
+    C -> C . OR C1 
+
+  I63:
+    V -> V LBRACK E RBRACK . 
+
+  I64:
+    Ǎ -> Ǎ A . SEMI 
+
+  I65:
+    A -> T . ID 
+    A -> T . ID LBRACK RBRACK 
+
+  I66:
+    H -> T ID LPAREN Ǎ RPAREN . 
+
+  I67:
+    Ř -> Ř E . COMMA 
+
+  I68:
+    E3 -> ID LPAREN Ř RPAREN . 
+
+  I69:
+    C -> C OR . C1 
+    C1 -> . C1 AND C2 
+    C1 -> . C2 
+    C2 -> . NOT C2 
+    C2 -> . C3 
+    C3 -> . E 
+    C3 -> . E LT E 
+    C3 -> . E LE E 
+    C3 -> . E GT E 
+    C3 -> . E GE E 
+    C3 -> . E EQ E 
+    C3 -> . E NE E 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I70:
+    S -> IF LPAREN C RPAREN . S 
+    S -> IF LPAREN C RPAREN . S ELSE S 
+    S -> . SEMI 
+    S -> . E SEMI 
+    S -> . RETURN E SEMI 
+    S -> . IF LPAREN C RPAREN S 
+    S -> . IF LPAREN C RPAREN S ELSE S 
+    S -> . WHILE LPAREN C RPAREN S 
+    S -> . B 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    B -> . LBRACE Ď Š RBRACE 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I71:
+    C1 -> C1 AND . C2 
+    C2 -> . NOT C2 
+    C2 -> . C3 
+    C3 -> . E 
+    C3 -> . E LT E 
+    C3 -> . E LE E 
+    C3 -> . E GT E 
+    C3 -> . E GE E 
+    C3 -> . E EQ E 
+    C3 -> . E NE E 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I72:
+    C3 -> E EQ . E 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I73:
+    C3 -> E GE . E 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I74:
+    C3 -> E GT . E 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I75:
+    C3 -> E LE . E 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I76:
+    C3 -> E LT . E 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I77:
+    C3 -> E NE . E 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I78:
+    C2 -> NOT C2 . 
+
+  I79:
+    S -> WHILE LPAREN C RPAREN . S 
+    S -> . SEMI 
+    S -> . E SEMI 
+    S -> . RETURN E SEMI 
+    S -> . IF LPAREN C RPAREN S 
+    S -> . IF LPAREN C RPAREN S ELSE S 
+    S -> . WHILE LPAREN C RPAREN S 
+    S -> . B 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    B -> . LBRACE Ď Š RBRACE 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I80:
+    Ǎ -> Ǎ A SEMI . 
+
+  I81:
+    A -> T ID . 
+    A -> T ID . LBRACK RBRACK 
+
+  I82:
+    Ř -> Ř E COMMA . 
+
+  I83:
+    C -> C OR C1 . 
+    C1 -> C1 . AND C2 
+
+  I84:
+    S -> IF LPAREN C RPAREN S . 
+    S -> IF LPAREN C RPAREN S . ELSE S 
+
+  I85:
+    C1 -> C1 AND C2 . 
+
+  I86:
+    C3 -> E EQ E . 
+
+  I87:
+    C3 -> E GE E . 
+
+  I88:
+    C3 -> E GT E . 
+
+  I89:
+    C3 -> E LE E . 
+
+  I90:
+    C3 -> E LT E . 
+
+  I91:
+    C3 -> E NE E . 
+
+  I92:
+    S -> WHILE LPAREN C RPAREN S . 
+
+  I93:
+    A -> T ID LBRACK . RBRACK 
+
+  I94:
+    S -> IF LPAREN C RPAREN S ELSE . S 
+    S -> . SEMI 
+    S -> . E SEMI 
+    S -> . RETURN E SEMI 
+    S -> . IF LPAREN C RPAREN S 
+    S -> . IF LPAREN C RPAREN S ELSE S 
+    S -> . WHILE LPAREN C RPAREN S 
+    S -> . B 
+    E -> . E1 ASSIGN E 
+    E -> . E1 PLUS_ASSIGN E 
+    E -> . E1 
+    B -> . LBRACE Ď Š RBRACE 
+    E1 -> . E1 PLUS E2 
+    E1 -> . E1 MINUS E2 
+    E1 -> . E2 
+    E2 -> . E2 MUL E3 
+    E2 -> . E2 DIV E3 
+    E2 -> . E3 
+    E3 -> . NUM 
+    E3 -> . V 
+    E3 -> . ID LPAREN Ř RPAREN 
+    E3 -> . LPAREN E RPAREN 
+    V -> . ID 
+    V -> . V LBRACK E RBRACK 
+    V -> . V LBRACK RBRACK 
+
+  I95:
+    A -> T ID LBRACK RBRACK . 
+
+  I96:
+    S -> IF LPAREN C RPAREN S ELSE S . 
+
+Goto转移
+  I0 --B--> I1
+  I0 --P--> I2
+  I0 --LBRACE--> I3
+  I3 --Ď--> I4
+  I4 --D--> I5
+  I4 --H--> I6
+  I4 --T--> I7
+  I4 --Š--> I8
+  I4 --INT--> I9
+  I4 --VOID--> I10
+  I6 --B--> I11
+  I6 --LBRACE--> I3
+  I7 --V--> I12
+  I7 --ID--> I13
+  I8 --B--> I14
+  I8 --E--> I15
+  I8 --E1--> I16
+  I8 --E2--> I17
+  I8 --E3--> I18
+  I8 --S--> I19
+  I8 --V--> I20
+  I8 --ID--> I21
+  I8 --IF--> I22
+  I8 --LBRACE--> I3
+  I8 --LPAREN--> I23
+  I8 --NUM--> I24
+  I8 --RBRACE--> I25
+  I8 --RETURN--> I26
+  I8 --SEMI--> I27
+  I8 --WHILE--> I28
+  I12 --LBRACK--> I29
+  I12 --SEMI--> I30
+  I13 --LPAREN--> I31
+  I15 --SEMI--> I32
+  I16 --ASSIGN--> I33
+  I16 --MINUS--> I34
+  I16 --PLUS--> I35
+  I16 --PLUS_ASSIGN--> I36
+  I17 --DIV--> I37
+  I17 --MUL--> I38
+  I20 --LBRACK--> I29
+  I21 --LPAREN--> I39
+  I22 --LPAREN--> I40
+  I23 --E--> I41
+  I23 --E1--> I16
+  I23 --E2--> I17
+  I23 --E3--> I18
+  I23 --V--> I20
+  I23 --ID--> I21
+  I23 --LPAREN--> I23
+  I23 --NUM--> I24
+  I26 --E--> I42
+  I26 --E1--> I16
+  I26 --E2--> I17
+  I26 --E3--> I18
+  I26 --V--> I20
+  I26 --ID--> I21
+  I26 --LPAREN--> I23
+  I26 --NUM--> I24
+  I28 --LPAREN--> I43
+  I29 --E--> I44
+  I29 --E1--> I16
+  I29 --E2--> I17
+  I29 --E3--> I18
+  I29 --V--> I20
+  I29 --ID--> I21
+  I29 --LPAREN--> I23
+  I29 --NUM--> I24
+  I29 --RBRACK--> I45
+  I31 --Ǎ--> I46
+  I33 --E--> I47
+  I33 --E1--> I16
+  I33 --E2--> I17
+  I33 --E3--> I18
+  I33 --V--> I20
+  I33 --ID--> I21
+  I33 --LPAREN--> I23
+  I33 --NUM--> I24
+  I34 --E2--> I48
+  I34 --E3--> I18
+  I34 --V--> I20
+  I34 --ID--> I21
+  I34 --LPAREN--> I23
+  I34 --NUM--> I24
+  I35 --E2--> I49
+  I35 --E3--> I18
+  I35 --V--> I20
+  I35 --ID--> I21
+  I35 --LPAREN--> I23
+  I35 --NUM--> I24
+  I36 --E--> I50
+  I36 --E1--> I16
+  I36 --E2--> I17
+  I36 --E3--> I18
+  I36 --V--> I20
+  I36 --ID--> I21
+  I36 --LPAREN--> I23
+  I36 --NUM--> I24
+  I37 --E3--> I51
+  I37 --V--> I20
+  I37 --ID--> I21
+  I37 --LPAREN--> I23
+  I37 --NUM--> I24
+  I38 --E3--> I52
+  I38 --V--> I20
+  I38 --ID--> I21
+  I38 --LPAREN--> I23
+  I38 --NUM--> I24
+  I39 --Ř--> I53
+  I40 --C--> I54
+  I40 --C1--> I55
+  I40 --C2--> I56
+  I40 --C3--> I57
+  I40 --E--> I58
+  I40 --E1--> I16
+  I40 --E2--> I17
+  I40 --E3--> I18
+  I40 --V--> I20
+  I40 --ID--> I21
+  I40 --LPAREN--> I23
+  I40 --NOT--> I59
+  I40 --NUM--> I24
+  I41 --RPAREN--> I60
+  I42 --SEMI--> I61
+  I43 --C--> I62
+  I43 --C1--> I55
+  I43 --C2--> I56
+  I43 --C3--> I57
+  I43 --E--> I58
+  I43 --E1--> I16
+  I43 --E2--> I17
+  I43 --E3--> I18
+  I43 --V--> I20
+  I43 --ID--> I21
+  I43 --LPAREN--> I23
+  I43 --NOT--> I59
+  I43 --NUM--> I24
+  I44 --RBRACK--> I63
+  I46 --A--> I64
+  I46 --T--> I65
+  I46 --INT--> I9
+  I46 --RPAREN--> I66
+  I46 --VOID--> I10
+  I48 --DIV--> I37
+  I48 --MUL--> I38
+  I49 --DIV--> I37
+  I49 --MUL--> I38
+  I53 --E--> I67
+  I53 --E1--> I16
+  I53 --E2--> I17
+  I53 --E3--> I18
+  I53 --V--> I20
+  I53 --ID--> I21
+  I53 --LPAREN--> I23
+  I53 --NUM--> I24
+  I53 --RPAREN--> I68
+  I54 --OR--> I69
+  I54 --RPAREN--> I70
+  I55 --AND--> I71
+  I58 --EQ--> I72
+  I58 --GE--> I73
+  I58 --GT--> I74
+  I58 --LE--> I75
+  I58 --LT--> I76
+  I58 --NE--> I77
+  I59 --C2--> I78
+  I59 --C3--> I57
+  I59 --E--> I58
+  I59 --E1--> I16
+  I59 --E2--> I17
+  I59 --E3--> I18
+  I59 --V--> I20
+  I59 --ID--> I21
+  I59 --LPAREN--> I23
+  I59 --NOT--> I59
+  I59 --NUM--> I24
+  I62 --OR--> I69
+  I62 --RPAREN--> I79
+  I64 --SEMI--> I80
+  I65 --ID--> I81
+  I67 --COMMA--> I82
+  I69 --C1--> I83
+  I69 --C2--> I56
+  I69 --C3--> I57
+  I69 --E--> I58
+  I69 --E1--> I16
+  I69 --E2--> I17
+  I69 --E3--> I18
+  I69 --V--> I20
+  I69 --ID--> I21
+  I69 --LPAREN--> I23
+  I69 --NOT--> I59
+  I69 --NUM--> I24
+  I70 --B--> I14
+  I70 --E--> I15
+  I70 --E1--> I16
+  I70 --E2--> I17
+  I70 --E3--> I18
+  I70 --S--> I84
+  I70 --V--> I20
+  I70 --ID--> I21
+  I70 --IF--> I22
+  I70 --LBRACE--> I3
+  I70 --LPAREN--> I23
+  I70 --NUM--> I24
+  I70 --RETURN--> I26
+  I70 --SEMI--> I27
+  I70 --WHILE--> I28
+  I71 --C2--> I85
+  I71 --C3--> I57
+  I71 --E--> I58
+  I71 --E1--> I16
+  I71 --E2--> I17
+  I71 --E3--> I18
+  I71 --V--> I20
+  I71 --ID--> I21
+  I71 --LPAREN--> I23
+  I71 --NOT--> I59
+  I71 --NUM--> I24
+  I72 --E--> I86
+  I72 --E1--> I16
+  I72 --E2--> I17
+  I72 --E3--> I18
+  I72 --V--> I20
+  I72 --ID--> I21
+  I72 --LPAREN--> I23
+  I72 --NUM--> I24
+  I73 --E--> I87
+  I73 --E1--> I16
+  I73 --E2--> I17
+  I73 --E3--> I18
+  I73 --V--> I20
+  I73 --ID--> I21
+  I73 --LPAREN--> I23
+  I73 --NUM--> I24
+  I74 --E--> I88
+  I74 --E1--> I16
+  I74 --E2--> I17
+  I74 --E3--> I18
+  I74 --V--> I20
+  I74 --ID--> I21
+  I74 --LPAREN--> I23
+  I74 --NUM--> I24
+  I75 --E--> I89
+  I75 --E1--> I16
+  I75 --E2--> I17
+  I75 --E3--> I18
+  I75 --V--> I20
+  I75 --ID--> I21
+  I75 --LPAREN--> I23
+  I75 --NUM--> I24
+  I76 --E--> I90
+  I76 --E1--> I16
+  I76 --E2--> I17
+  I76 --E3--> I18
+  I76 --V--> I20
+  I76 --ID--> I21
+  I76 --LPAREN--> I23
+  I76 --NUM--> I24
+  I77 --E--> I91
+  I77 --E1--> I16
+  I77 --E2--> I17
+  I77 --E3--> I18
+  I77 --V--> I20
+  I77 --ID--> I21
+  I77 --LPAREN--> I23
+  I77 --NUM--> I24
+  I79 --B--> I14
+  I79 --E--> I15
+  I79 --E1--> I16
+  I79 --E2--> I17
+  I79 --E3--> I18
+  I79 --S--> I92
+  I79 --V--> I20
+  I79 --ID--> I21
+  I79 --IF--> I22
+  I79 --LBRACE--> I3
+  I79 --LPAREN--> I23
+  I79 --NUM--> I24
+  I79 --RETURN--> I26
+  I79 --SEMI--> I27
+  I79 --WHILE--> I28
+  I81 --LBRACK--> I93
+  I83 --AND--> I71
+  I84 --ELSE--> I94
+  I93 --RBRACK--> I95
+  I94 --B--> I14
+  I94 --E--> I15
+  I94 --E1--> I16
+  I94 --E2--> I17
+  I94 --E3--> I18
+  I94 --S--> I96
+  I94 --V--> I20
+  I94 --ID--> I21
+  I94 --IF--> I22
+  I94 --LBRACE--> I3
+  I94 --LPAREN--> I23
+  I94 --NUM--> I24
+  I94 --RETURN--> I26
+  I94 --SEMI--> I27
+  I94 --WHILE--> I28
+
+LR(0)冲突检查（引入SLR(1)的动机）
+  发现LR(0)冲突，需用FOLLOW集尝试消解：
+  I4 存在移进-归约冲突
+  I13 存在移进-归约冲突
+  I16 存在移进-归约冲突
+  I17 存在移进-归约冲突
+  I20 存在移进-归约冲突
+  I21 存在移进-归约冲突
+  I48 存在移进-归约冲突
+  I49 存在移进-归约冲突
+  I55 存在移进-归约冲突
+  I58 存在移进-归约冲突
+  I81 存在移进-归约冲突
+  I83 存在移进-归约冲突
+  I84 存在移进-归约冲突
+
+FIRST 集
+  FIRST(A): INT VOID 
+  FIRST(AND): AND 
+  FIRST(ASSIGN): ASSIGN 
+  FIRST(B): LBRACE 
+  FIRST(C): ID LPAREN NOT NUM 
+  FIRST(C1): ID LPAREN NOT NUM 
+  FIRST(C2): ID LPAREN NOT NUM 
+  FIRST(C3): ID LPAREN NUM 
+  FIRST(COMMA): COMMA 
+  FIRST(D): INT VOID 
+  FIRST(DIV): DIV 
+  FIRST(E): ID LPAREN NUM 
+  FIRST(E1): ID LPAREN NUM 
+  FIRST(E2): ID LPAREN NUM 
+  FIRST(E3): ID LPAREN NUM 
+  FIRST(ELSE): ELSE 
+  FIRST(EQ): EQ 
+  FIRST(GE): GE 
+  FIRST(GT): GT 
+  FIRST(H): INT VOID 
+  FIRST(ID): ID 
+  FIRST(IF): IF 
+  FIRST(INT): INT 
+  FIRST(LBRACE): LBRACE 
+  FIRST(LBRACK): LBRACK 
+  FIRST(LE): LE 
+  FIRST(LPAREN): LPAREN 
+  FIRST(LT): LT 
+  FIRST(MINUS): MINUS 
+  FIRST(MUL): MUL 
+  FIRST(NE): NE 
+  FIRST(NOT): NOT 
+  FIRST(NUM): NUM 
+  FIRST(OR): OR 
+  FIRST(P): LBRACE 
+  FIRST(P'): LBRACE 
+  FIRST(PLUS): PLUS 
+  FIRST(PLUS_ASSIGN): PLUS_ASSIGN 
+  FIRST(RBRACE): RBRACE 
+  FIRST(RBRACK): RBRACK 
+  FIRST(RETURN): RETURN 
+  FIRST(RPAREN): RPAREN 
+  FIRST(S): ID IF LBRACE LPAREN NUM RETURN SEMI WHILE 
+  FIRST(SEMI): SEMI 
+  FIRST(T): INT VOID 
+  FIRST(V): ID 
+  FIRST(VOID): VOID 
+  FIRST(WHILE): WHILE 
+  FIRST(Ď): INT VOID e 
+  FIRST(Ř): ID LPAREN NUM e 
+  FIRST(Š): ID IF LBRACE LPAREN NUM RETURN SEMI WHILE e 
+  FIRST(Ǎ): INT VOID e 
+
+FOLLOW 集
+  FOLLOW(A): SEMI 
+  FOLLOW(B): $ ELSE ID IF INT LBRACE LPAREN NUM RBRACE RETURN SEMI VOID WHILE 
+  FOLLOW(C): OR RPAREN 
+  FOLLOW(C1): AND OR RPAREN 
+  FOLLOW(C2): AND OR RPAREN 
+  FOLLOW(C3): AND OR RPAREN 
+  FOLLOW(D): ID IF INT LBRACE LPAREN NUM RBRACE RETURN SEMI VOID WHILE 
+  FOLLOW(E): AND COMMA EQ GE GT LE LT NE OR RBRACK RPAREN SEMI 
+  FOLLOW(E1): AND ASSIGN COMMA EQ GE GT LE LT MINUS NE OR PLUS PLUS_ASSIGN RBRACK RPAREN SEMI 
+  FOLLOW(E2): AND ASSIGN COMMA DIV EQ GE GT LE LT MINUS MUL NE OR PLUS PLUS_ASSIGN RBRACK RPAREN SEMI 
+  FOLLOW(E3): AND ASSIGN COMMA DIV EQ GE GT LE LT MINUS MUL NE OR PLUS PLUS_ASSIGN RBRACK RPAREN SEMI 
+  FOLLOW(H): LBRACE 
+  FOLLOW(P): $ 
+  FOLLOW(P'): 
+  FOLLOW(S): ELSE ID IF LBRACE LPAREN NUM RBRACE RETURN SEMI WHILE 
+  FOLLOW(T): ID 
+  FOLLOW(V): AND ASSIGN COMMA DIV EQ GE GT LBRACK LE LT MINUS MUL NE OR PLUS PLUS_ASSIGN RBRACK RPAREN SEMI 
+  FOLLOW(Ď): ID IF INT LBRACE LPAREN NUM RBRACE RETURN SEMI VOID WHILE 
+  FOLLOW(Ř): ID LPAREN NUM RPAREN 
+  FOLLOW(Š): ID IF LBRACE LPAREN NUM RBRACE RETURN SEMI WHILE 
+  FOLLOW(Ǎ): INT RPAREN VOID 
+
+SLR(1) ACTION 表
+  状态  AND   ASSIGNCOMMA DIV   ELSE  EQ    GE    GT    ID    IF    INT   LBRACELBRACKLE    LPARENLT    MINUS MUL   NE    NOT   NUM   OR    PLUS  PLUS_ASSIGNRBRACERBRACKRETURNRPARENSEMI  VOID  WHILE $     
+  0                                                                       s3                                                                                                                            
+  1                                                                                                                                                                                               r1    
+  2                                                                                                                                                                                               acc   
+  3                                                     r6    r6    r6    r6                r6                                  r6                      r6          r6          r6    r6    r6          
+  4                                                     r18   r18   s9    r18               r18                                 r18                     r18         r18         r18   s10   r18         
+  5                                                     r5    r5    r5    r5                r5                                  r5                      r5          r5          r5    r5    r5          
+  6                                                                       s3                                                                                                                            
+  7                                                     s13                                                                                                                                             
+  8                                                     s21   s22         s3                s23                                 s24                     s25         s26         s27         s28         
+  9                                                     r3                                                                                                                                              
+  10                                                    r4                                                                                                                                              
+  11                                                    r8    r8    r8    r8                r8                                  r8                      r8          r8          r8    r8    r8          
+  12                                                                            s29                                                                                             s30                     
+  13    r10   r10   r10   r10         r10   r10   r10                           r10   r10   s31   r10   r10   r10   r10               r10   r10   r10         r10         r10   r10                     
+  14                            r25                     r25   r25         r25               r25                                 r25                     r25         r25         r25         r25         
+  15                                                                                                                                                                            s32                     
+  16    r28   s33   r28               r28   r28   r28                                 r28         r28   s34         r28               r28   s35   s36         r28         r28   r28                     
+  17    r31   r31   r31   s37         r31   r31   r31                                 r31         r31   r31   s38   r31               r31   r31   r31         r31         r31   r31                     
+  18    r34   r34   r34   r34         r34   r34   r34                                 r34         r34   r34   r34   r34               r34   r34   r34         r34         r34   r34                     
+  19                                                    r17   r17         r17               r17                                 r17                     r17         r17         r17         r17         
+  20    r36   r36   r36   r36         r36   r36   r36                           s29   r36         r36   r36   r36   r36               r36   r36   r36         r36         r36   r36                     
+  21    r10   r10   r10   r10         r10   r10   r10                           r10   r10   s39   r10   r10   r10   r10               r10   r10   r10         r10         r10   r10                     
+  22                                                                                        s40                                                                                                         
+  23                                                    s21                                 s23                                 s24                                                                     
+  24    r35   r35   r35   r35         r35   r35   r35                                 r35         r35   r35   r35   r35               r35   r35   r35         r35         r35   r35                     
+  25                            r2                      r2    r2    r2    r2                r2                                  r2                      r2          r2          r2    r2    r2    r2    
+  26                                                    s21                                 s23                                 s24                                                                     
+  27                            r19                     r19   r19         r19               r19                                 r19                     r19         r19         r19         r19         
+  28                                                                                        s43                                                                                                         
+  29                                                    s21                                 s23                                 s24                           s45                                       
+  30                                                    r7    r7    r7    r7                r7                                  r7                      r7          r7          r7    r7    r7          
+  31                                                                r14                                                                                                   r14         r14               
+  32                            r20                     r20   r20         r20               r20                                 r20                     r20         r20         r20         r20         
+  33                                                    s21                                 s23                                 s24                                                                     
+  34                                                    s21                                 s23                                 s24                                                                     
+  35                                                    s21                                 s23                                 s24                                                                     
+  36                                                    s21                                 s23                                 s24                                                                     
+  37                                                    s21                                 s23                                 s24                                                                     
+  38                                                    s21                                 s23                                 s24                                                                     
+  39                                                    r40                                 r40                                 r40                                       r40                           
+  40                                                    s21                                 s23                           s59   s24                                                                     
+  41                                                                                                                                                                      s60                           
+  42                                                                                                                                                                            s61                     
+  43                                                    s21                                 s23                           s59   s24                                                                     
+  44                                                                                                                                                          s63                                       
+  45    r12   r12   r12   r12         r12   r12   r12                           r12   r12         r12   r12   r12   r12               r12   r12   r12         r12         r12   r12                     
+  46                                                                s9                                                                                                    s66         s10               
+  47    r26         r26               r26   r26   r26                                 r26         r26               r26               r26                     r26         r26   r26                     
+  48    r30   r30   r30   s37         r30   r30   r30                                 r30         r30   r30   s38   r30               r30   r30   r30         r30         r30   r30                     
+  49    r29   r29   r29   s37         r29   r29   r29                                 r29         r29   r29   s38   r29               r29   r29   r29         r29         r29   r29                     
+  50    r27         r27               r27   r27   r27                                 r27         r27               r27               r27                     r27         r27   r27                     
+  51    r33   r33   r33   r33         r33   r33   r33                                 r33         r33   r33   r33   r33               r33   r33   r33         r33         r33   r33                     
+  52    r32   r32   r32   r32         r32   r32   r32                                 r32         r32   r32   r32   r32               r32   r32   r32         r32         r32   r32                     
+  53                                                    s21                                 s23                                 s24                                       s68                           
+  54                                                                                                                                  s69                                 s70                           
+  55    s71                                                                                                                           r42                                 r42                           
+  56    r44                                                                                                                           r44                                 r44                           
+  57    r46                                                                                                                           r46                                 r46                           
+  58    r47                           s72   s73   s74                                 s75         s76               s77               r47                                 r47                           
+  59                                                    s21                                 s23                           s59   s24                                                                     
+  60    r38   r38   r38   r38         r38   r38   r38                                 r38         r38   r38   r38   r38               r38   r38   r38         r38         r38   r38                     
+  61                            r21                     r21   r21         r21               r21                                 r21                     r21         r21         r21         r21         
+  62                                                                                                                                  s69                                 s79                           
+  63    r11   r11   r11   r11         r11   r11   r11                           r11   r11         r11   r11   r11   r11               r11   r11   r11         r11         r11   r11                     
+  64                                                                                                                                                                            s80                     
+  65                                                    s81                                                                                                                                             
+  66                                                                      r9                                                                                                                            
+  67                s82                                                                                                                                                                                 
+  68    r37   r37   r37   r37         r37   r37   r37                                 r37         r37   r37   r37   r37               r37   r37   r37         r37         r37   r37                     
+  69                                                    s21                                 s23                           s59   s24                                                                     
+  70                                                    s21   s22         s3                s23                                 s24                                 s26         s27         s28         
+  71                                                    s21                                 s23                           s59   s24                                                                     
+  72                                                    s21                                 s23                                 s24                                                                     
+  73                                                    s21                                 s23                                 s24                                                                     
+  74                                                    s21                                 s23                                 s24                                                                     
+  75                                                    s21                                 s23                                 s24                                                                     
+  76                                                    s21                                 s23                                 s24                                                                     
+  77                                                    s21                                 s23                                 s24                                                                     
+  78    r45                                                                                                                           r45                                 r45                           
+  79                                                    s21   s22         s3                s23                                 s24                                 s26         s27         s28         
+  80                                                                r13                                                                                                   r13         r13               
+  81                                                                            s93                                                                                             r15                     
+  82                                                    r39                                 r39                                 r39                                       r39                           
+  83    s71                                                                                                                           r41                                 r41                           
+  84                            s94                     r22   r22         r22               r22                                 r22                     r22         r22         r22         r22         
+  85    r43                                                                                                                           r43                                 r43                           
+  86    r52                                                                                                                           r52                                 r52                           
+  87    r51                                                                                                                           r51                                 r51                           
+  88    r50                                                                                                                           r50                                 r50                           
+  89    r49                                                                                                                           r49                                 r49                           
+  90    r48                                                                                                                           r48                                 r48                           
+  91    r53                                                                                                                           r53                                 r53                           
+  92                            r24                     r24   r24         r24               r24                                 r24                     r24         r24         r24         r24         
+  93                                                                                                                                                          s95                                       
+  94                                                    s21   s22         s3                s23                                 s24                                 s26         s27         s28         
+  95                                                                                                                                                                            r16                     
+  96                            r23                     r23   r23         r23               r23                                 r23                     r23         r23         r23         r23         
+
+SLR(1) GOTO 表
+  状态  A     B     C     C1    C2    C3    D     E     E1    E2    E3    H     P     S     T     V     Ď     Ř     Š     Ǎ     
+  0           1                                                                 2                                               
+  1                                                                                                                             
+  2                                                                                                                             
+  3                                                                                                     4                       
+  4                                         5                             6                 7                       8           
+  5                                                                                                                             
+  6           11                                                                                                                
+  7                                                                                               12                            
+  8           14                                  15    16    17    18                19          20                            
+  9                                                                                                                             
+  10                                                                                                                            
+  11                                                                                                                            
+  12                                                                                                                            
+  13                                                                                                                            
+  14                                                                                                                            
+  15                                                                                                                            
+  16                                                                                                                            
+  17                                                                                                                            
+  18                                                                                                                            
+  19                                                                                                                            
+  20                                                                                                                            
+  21                                                                                                                            
+  22                                                                                                                            
+  23                                              41    16    17    18                            20                            
+  24                                                                                                                            
+  25                                                                                                                            
+  26                                              42    16    17    18                            20                            
+  27                                                                                                                            
+  28                                                                                                                            
+  29                                              44    16    17    18                            20                            
+  30                                                                                                                            
+  31                                                                                                                      46    
+  32                                                                                                                            
+  33                                              47    16    17    18                            20                            
+  34                                                          48    18                            20                            
+  35                                                          49    18                            20                            
+  36                                              50    16    17    18                            20                            
+  37                                                                51                            20                            
+  38                                                                52                            20                            
+  39                                                                                                          53                
+  40                54    55    56    57          58    16    17    18                            20                            
+  41                                                                                                                            
+  42                                                                                                                            
+  43                62    55    56    57          58    16    17    18                            20                            
+  44                                                                                                                            
+  45                                                                                                                            
+  46    64                                                                                  65                                  
+  47                                                                                                                            
+  48                                                                                                                            
+  49                                                                                                                            
+  50                                                                                                                            
+  51                                                                                                                            
+  52                                                                                                                            
+  53                                              67    16    17    18                            20                            
+  54                                                                                                                            
+  55                                                                                                                            
+  56                                                                                                                            
+  57                                                                                                                            
+  58                                                                                                                            
+  59                            78    57          58    16    17    18                            20                            
+  60                                                                                                                            
+  61                                                                                                                            
+  62                                                                                                                            
+  63                                                                                                                            
+  64                                                                                                                            
+  65                                                                                                                            
+  66                                                                                                                            
+  67                                                                                                                            
+  68                                                                                                                            
+  69                      83    56    57          58    16    17    18                            20                            
+  70          14                                  15    16    17    18                84          20                            
+  71                            85    57          58    16    17    18                            20                            
+  72                                              86    16    17    18                            20                            
+  73                                              87    16    17    18                            20                            
+  74                                              88    16    17    18                            20                            
+  75                                              89    16    17    18                            20                            
+  76                                              90    16    17    18                            20                            
+  77                                              91    16    17    18                            20                            
+  78                                                                                                                            
+  79          14                                  15    16    17    18                92          20                            
+  80                                                                                                                            
+  81                                                                                                                            
+  82                                                                                                                            
+  83                                                                                                                            
+  84                                                                                                                            
+  85                                                                                                                            
+  86                                                                                                                            
+  87                                                                                                                            
+  88                                                                                                                            
+  89                                                                                                                            
+  90                                                                                                                            
+  91                                                                                                                            
+  92                                                                                                                            
+  93                                                                                                                            
+  94          14                                  15    16    17    18                96          20                            
+  95                                                                                                                            
+  96                                                                                                                            
+
+SLR(1) 冲突检查
+  发现冲突，该文法不是 SLR(1) 文法：
+  I84 在符号 ELSE 上存在移进-归约冲突（移进优先）
+
+SLR(1) 分析表已导出到: e:\2026_Junior_S2\��ʽ���������\��ҵ\����ҵ2\QCompiler\parser\slr1_table.txt
